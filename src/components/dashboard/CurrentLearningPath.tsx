@@ -1,3 +1,4 @@
+import React from 'react';
 import { useState, useEffect } from "react";
 import { DashboardCard } from "./DashboardCard";
 import { Badge } from "@/components/ui/badge";
