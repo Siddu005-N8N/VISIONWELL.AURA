@@ -44,8 +44,9 @@ export default defineConfig(({ mode }) => ({
   },
   plugins: [
     react({
-      jsxRuntime: 'automatic',
-      jsxImportSource: 'react'
+      jsxRuntime: 'classic',
+      jsxFactory: 'React.createElement',
+      jsxFragment: 'React.Fragment'
     }),
     getComponentTagger(mode),
   ].filter(Boolean),
@@ -63,9 +64,8 @@ export default defineConfig(({ mode }) => ({
   },
   esbuild: {
     logOverride: { 'this-is-undefined-in-esm': 'silent' },
-    jsx: 'automatic',
-    jsxFactory: undefined,
-    jsxFragment: undefined,
-    jsxImportSource: 'react',
+    jsx: 'transform',
+    jsxFactory: 'React.createElement',
+    jsxFragment: 'React.Fragment'
   },
 }));
