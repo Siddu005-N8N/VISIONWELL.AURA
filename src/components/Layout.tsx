@@ -1,3 +1,4 @@
+import React from 'react';
 import { ReactNode } from "react";
 import { TopNavbar } from "./navigation/TopNavbar";
 
@@ -16,4 +17,5 @@ export const Layout = ({ children }: LayoutProps) => {
       </main>
     </div>
   );
+
 };
