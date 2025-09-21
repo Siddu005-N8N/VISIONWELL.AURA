@@ -1,3 +1,4 @@
+import React from 'react';
 import { ReactNode } from "react";
 import { cn } from "@/lib/utils";
 
@@ -42,4 +43,5 @@ export const DashboardCard = ({
       {children}
     </div>
   );
+
 };
