@@ -1,3 +1,4 @@
+import React from 'react';
 import { Layout } from "@/components/Layout";
 import { DashboardCard } from "@/components/dashboard/DashboardCard";
 import { ProgressRing } from "@/components/dashboard/ProgressRing";
