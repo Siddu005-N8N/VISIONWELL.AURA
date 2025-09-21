@@ -45,15 +45,7 @@ export default defineConfig(({ mode }) => ({
   plugins: [
     react({
       jsxRuntime: 'automatic',
-      jsxImportSource: 'react',
-      plugins: [
-        ['@swc/plugin-transform-imports', {
-          'react': {
-            transform: 'react',
-            preventFullImport: true
-          }
-        }]
-      ]
+      jsxImportSource: 'react'
     }),
     getComponentTagger(mode),
   ].filter(Boolean),
