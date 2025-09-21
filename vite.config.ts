@@ -44,8 +44,11 @@ export default defineConfig(({ mode }) => ({
   },
   plugins: [
     react({
-      // Disable SWC transforms that might interfere
+      // Force classic JSX transform
       jsxRuntime: 'classic',
+      jsxImportSource: undefined,
+      // Disable automatic JSX runtime
+      plugins: []
     }),
     getComponentTagger(mode),
   ].filter(Boolean),
@@ -56,9 +59,23 @@ export default defineConfig(({ mode }) => ({
   },
   define: {
     __APP_VERSION__: JSON.stringify(process.env.npm_package_version),
-    'process.env.NODE_ENV': JSON.stringify(mode)
+    'process.env.NODE_ENV': JSON.stringify(mode),
+    // Force classic JSX
+    __DEV__: mode === 'development'
+  },
+  // Force classic JSX in all transforms
+  esbuild: {
+    jsx: 'transform',
+    jsxFactory: 'React.createElement',
+    jsxFragment: 'React.Fragment',
+    jsxInject: `import React from 'react'`
   },
   optimizeDeps: {
     include: ['react', 'react-dom'],
-  },
+    esbuildOptions: {
+      jsx: 'transform',
+      jsxFactory: 'React.createElement',
+      jsxFragment: 'React.Fragment'
+    }
+  }
 }));
