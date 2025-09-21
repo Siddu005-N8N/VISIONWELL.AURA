@@ -1,3 +1,4 @@
+import React from 'react';
 import { cn } from "@/lib/utils";
 
 interface StreakTrackerProps {
@@ -56,4 +57,5 @@ export const StreakTracker = ({ streak, maxStreak, className }: StreakTrackerPro
       </div>
     </div>
   );
+
 };
