@@ -1,5 +1,5 @@
 import { defineConfig } from "vite";
-import react from "@vitejs/plugin-react";
+import react from "@vitejs/plugin-react-swc";
 import path from "path";
 
 // Conditionally import lovable-tagger only in development
@@ -43,13 +43,7 @@ export default defineConfig(({ mode }) => ({
     },
   },
   plugins: [
-    react({
-      jsxRuntime: 'automatic',
-      jsxImportSource: 'react',
-      babel: {
-        plugins: [],
-      },
-    }),
+    react(),
     getComponentTagger(mode),
   ].filter(Boolean),
   resolve: {
