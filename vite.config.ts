@@ -8,6 +8,12 @@ export default defineConfig(({ mode }) => ({
   server: {
     host: "::",
     port: 8080,
+    allowedHosts: [
+      "localhost",
+      "127.0.0.1",
+      "visionwell-aura.onrender.com",
+      ".onrender.com"
+    ],
   },
   plugins: [
     react(),
@@ -20,3 +26,4 @@ export default defineConfig(({ mode }) => ({
     },
   },
 }));
+
