@@ -54,4 +54,10 @@ export default defineConfig(({ mode }) => ({
   define: {
     __APP_VERSION__: JSON.stringify(process.env.npm_package_version),
   },
+  optimizeDeps: {
+    include: ['react', 'react-dom'],
+  },
+  esbuild: {
+    logOverride: { 'this-is-undefined-in-esm': 'silent' }
+  },
 }));
