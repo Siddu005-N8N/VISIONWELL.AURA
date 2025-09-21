@@ -17,28 +17,26 @@ import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
 
-const App = () => (
-  <QueryClientProvider client={queryClient}>
-    <AuthProvider>
-      <TooltipProvider>
-        <Toaster />
-        <Sonner />
-        <BrowserRouter>
-          <Routes>
-            <Route path="/login" element={<Login />} />
-            <Route path="/register" element={<Register />} />
-            <Route path="/" element={<ProtectedRoute><Index /></ProtectedRoute>} />
-            <Route path="/mental" element={<ProtectedRoute><MentalCoach /></ProtectedRoute>} />
-            <Route path="/physical" element={<ProtectedRoute><PhysicalCoach /></ProtectedRoute>} />
-            <Route path="/roadmaps" element={<ProtectedRoute><Roadmaps /></ProtectedRoute>} />
-            <Route path="/tracker" element={<ProtectedRoute><DayTracker /></ProtectedRoute>} />
-            {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
-            <Route path="*" element={<NotFound />} />
-          </Routes>
-        </BrowserRouter>
-      </TooltipProvider>
-    </AuthProvider>
-  </QueryClientProvider>
+// Using React.createElement to avoid JSX transform issues
+const App = () => React.createElement(QueryClientProvider, { client: queryClient },
+  React.createElement(AuthProvider, {},
+    React.createElement(TooltipProvider, {},
+      React.createElement(Toaster, {}),
+      React.createElement(Sonner, {}),
+      React.createElement(BrowserRouter, {},
+        React.createElement(Routes, {},
+          React.createElement(Route, { path: "/login", element: React.createElement(Login, {}) }),
+          React.createElement(Route, { path: "/register", element: React.createElement(Register, {}) }),
+          React.createElement(Route, { path: "/", element: React.createElement(ProtectedRoute, {}, React.createElement(Index, {})) }),
+          React.createElement(Route, { path: "/mental", element: React.createElement(ProtectedRoute, {}, React.createElement(MentalCoach, {})) }),
+          React.createElement(Route, { path: "/physical", element: React.createElement(ProtectedRoute, {}, React.createElement(PhysicalCoach, {})) }),
+          React.createElement(Route, { path: "/roadmaps", element: React.createElement(ProtectedRoute, {}, React.createElement(Roadmaps, {})) }),
+          React.createElement(Route, { path: "/tracker", element: React.createElement(ProtectedRoute, {}, React.createElement(DayTracker, {})) }),
+          React.createElement(Route, { path: "*", element: React.createElement(NotFound, {}) })
+        )
+      )
+    )
+  )
 );
 
 export default App;
