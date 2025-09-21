@@ -59,8 +59,13 @@ export default defineConfig(({ mode }) => ({
     __APP_VERSION__: JSON.stringify(process.env.npm_package_version),
   },
   optimizeDeps: {
-    include: ['react', 'react-dom', 'react/jsx-runtime'],
+    include: ['react', 'react-dom'],
     force: true,
+    esbuildOptions: {
+      jsx: 'transform',
+      jsxFactory: 'React.createElement',
+      jsxFragment: 'React.Fragment'
+    }
   },
   esbuild: {
     logOverride: { 'this-is-undefined-in-esm': 'silent' },
