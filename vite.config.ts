@@ -1,5 +1,5 @@
 import { defineConfig } from "vite";
-import react from "@vitejs/plugin-react";
+import react from "@vitejs/plugin-react-swc";
 import path from "path";
 
 // Conditionally import lovable-tagger only in development
@@ -44,7 +44,8 @@ export default defineConfig(({ mode }) => ({
   },
   plugins: [
     react({
-      jsxRuntime: 'classic'
+      // Disable SWC transforms that might interfere
+      jsxRuntime: 'classic',
     }),
     getComponentTagger(mode),
   ].filter(Boolean),
@@ -55,20 +56,9 @@ export default defineConfig(({ mode }) => ({
   },
   define: {
     __APP_VERSION__: JSON.stringify(process.env.npm_package_version),
+    'process.env.NODE_ENV': JSON.stringify(mode)
   },
   optimizeDeps: {
     include: ['react', 'react-dom'],
-    force: true,
-    esbuildOptions: {
-      jsx: 'transform',
-      jsxFactory: 'React.createElement',
-      jsxFragment: 'React.Fragment'
-    }
-  },
-  esbuild: {
-    logOverride: { 'this-is-undefined-in-esm': 'silent' },
-    jsx: 'transform',
-    jsxFactory: 'React.createElement',
-    jsxFragment: 'React.Fragment'
   },
 }));
