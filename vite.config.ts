@@ -43,7 +43,9 @@ export default defineConfig(({ mode }) => ({
     },
   },
   plugins: [
-    react(),
+    react({
+      jsxRuntime: 'automatic'
+    }),
     getComponentTagger(mode),
   ].filter(Boolean),
   resolve: {
