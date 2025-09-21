@@ -44,7 +44,16 @@ export default defineConfig(({ mode }) => ({
   },
   plugins: [
     react({
-      jsxRuntime: 'automatic'
+      jsxRuntime: 'automatic',
+      jsxImportSource: 'react',
+      plugins: [
+        ['@swc/plugin-transform-imports', {
+          'react': {
+            transform: 'react',
+            preventFullImport: true
+          }
+        }]
+      ]
     }),
     getComponentTagger(mode),
   ].filter(Boolean),
@@ -57,9 +66,14 @@ export default defineConfig(({ mode }) => ({
     __APP_VERSION__: JSON.stringify(process.env.npm_package_version),
   },
   optimizeDeps: {
-    include: ['react', 'react-dom'],
+    include: ['react', 'react-dom', 'react/jsx-runtime'],
+    force: true,
   },
   esbuild: {
-    logOverride: { 'this-is-undefined-in-esm': 'silent' }
+    logOverride: { 'this-is-undefined-in-esm': 'silent' },
+    jsx: 'automatic',
+    jsxFactory: undefined,
+    jsxFragment: undefined,
+    jsxImportSource: 'react',
   },
 }));
